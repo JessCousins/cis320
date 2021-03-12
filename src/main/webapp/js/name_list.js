@@ -35,6 +35,99 @@ function updateTable() {
         }
     );
 }
-    // Call your code.
+
+// Call your code.
 updateTable();
+
+// Called when "Add Item" button is clicked
+function showDialogAdd() {
+    console.log("ADD ITEM");
+
+    // Show the hidden dialog
+    $('#myModal').modal('show');
+
+    $('#id').val("");
+    $('#firstName').val("");
+    $('#lastName').val("");
+    $('#email').val("");
+    $('#phone').val("");
+    $('#birthday').val("");
+
+    $('#firstName').removeClass("is-valid");
+    $('#lastName').removeClass("is-valid");
+    $('#email').removeClass("is-valid");
+    $('#phone').removeClass("is-valid");
+    $('#birthday').removeClass("is-valid");
+
+    $('#firstName').removeClass("is-invalid");
+    $('#lastName').removeClass("is-invalid");
+    $('#email').removeClass("is-invalid");
+    $('#phone').removeClass("is-invalid");
+    $('#birthday').removeClass("is-invalid");
+}
+
+let addItemButton = $('#addItem');
+addItemButton.on("click", showDialogAdd);
+
+function saveChanges() {
+    console.log("Save changes");
+    let firstName = $('#firstName').val();
+    let lastName = $('#lastName').val();
+    let email = $('#email').val();
+    let phone = $('#phone').val();
+    let birthday = $('#birthday').val();
+
+    // Create the regular expression
+    let reg = /^[A-Za-z]{1,10}$/;
+
+    let regEmail = /^.+@.+$/;
+
+    let regPhone = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+
+    let regBirth = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+
+    // Test the regular expression to see if there is a match
+    if (reg.test(firstName)) {
+        $('#firstName').removeClass("is-invalid");
+        $('#firstName').addClass("is-valid");
+    } else {
+        $('#firstName').removeClass("is-valid");
+        $('#firstName').addClass("is-invalid");
+    }
+
+    if (reg.test(lastName)) {
+        $('#lastName').removeClass("is-invalid");
+        $('#lastName').addClass("is-valid");
+    } else {
+        $('#lastName').removeClass("is-valid");
+        $('#lastName').addClass("is-invalid");
+    }
+
+    if (regEmail.test(email)) {
+        $('#email').removeClass("is-invalid");
+        $('#email').addClass("is-valid");
+    } else {
+        $('#email').removeClass("is-valid");
+        $('#email').addClass("is-invalid");
+    }
+
+    if (regPhone.test(phone)) {
+        $('#phone').removeClass("is-invalid");
+        $('#phone').addClass("is-valid");
+    } else {
+        $('#phone').removeClass("is-valid");
+        $('#phone').addClass("is-invalid");
+    }
+
+    if (regBirth.test(birthday)) {
+        $('#birthday').removeClass("is-invalid");
+        $('#birthday').addClass("is-valid");
+    } else {
+        $('#birthday').removeClass("is-valid");
+        $('#birthday').addClass("is-invalid");
+    }
+
+}
+let saveChangesButton = $('#saveChanges');
+saveChangesButton.on("click", saveChanges);
 
