@@ -71,6 +71,7 @@ addItemButton.on("click", showDialogAdd);
 
 function saveChanges() {
     console.log("Save changes");
+    let isValid = true;
     let firstName = $('#firstName').val();
     let lastName = $('#lastName').val();
     let email = $('#email').val();
@@ -126,7 +127,38 @@ function saveChanges() {
         $('#birthday').removeClass("is-valid");
         $('#birthday').addClass("is-invalid");
     }
+    if (isValid) {
+        console.log("Valid form");
+        // Code to submit your form will go here.
+        let firstName = $('#firstName').val();
+        let lastName = $('#lastName').val();
+        let email = $('#email').val();
+        let phone = $('#phone').val();
+        let birthday = $('#birthday').val();
 
+        let user = {
+            first: firstName,
+            last: lastName,
+            email,
+            phone,
+            birthday,
+        }
+        console.log(user);
+
+        let userJSONObject = JSON.stringify(user);
+
+        $.ajax({
+            type: 'POST',
+            url: 'api/name_list_edit',
+            data: userJSONObject,
+            success: function(dataFromServer) {
+                console.log(dataFromServer);
+                updateTable();
+            },
+            contentType: "application/json",
+            dataType: 'JSON'
+        });
+    }
 }
 let saveChangesButton = $('#saveChanges');
 saveChangesButton.on("click", saveChanges);
