@@ -104,4 +104,32 @@ public class PersonDAO {
             catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
         }
     }
+
+    public static void deletePerson(Person person) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            conn = DBHelper.getConnection();
+
+            String sql = "delete from person where id = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, person.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException se) {
+            log.log(Level.SEVERE, "SQL Error", se );
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "Error", e );
+        } finally {
+
+            try { if(stmt != null) stmt.close(); }
+            catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
+
+            try { if(conn != null) conn.close(); }
+            catch (Exception e) { log.log(Level.SEVERE, "Error", e ); }
+        }
+    }
 }

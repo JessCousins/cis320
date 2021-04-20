@@ -1,16 +1,18 @@
 edu/simpson/cis320/crud_app/MemeServlet.java
  edu.simpson.cis320.crud_app.MemeServlet
-edu/simpson/cis320/crud_app/Person.java
- edu.simpson.cis320.crud_app.Person
+edu/simpson/cis320/crud_app/SerletContext.java
+ edu.simpson.cis320.crud_app.SerletContext
 edu/simpson/cis320/crud_app/DBHelper.java
  edu.simpson.cis320.crud_app.DBHelper
 edu/simpson/cis320/crud_app/HelloServlet.java
  edu.simpson.cis320.crud_app.HelloServlet
-edu/simpson/cis320/crud_app/SerletContext.java
- edu.simpson.cis320.crud_app.SerletContext
+edu/simpson/cis320/crud_app/Person.java
+ edu.simpson.cis320.crud_app.Person
 edu/simpson/cis320/crud_app/PersonDAO.java
  edu.simpson.cis320.crud_app.PersonDAO
-edu/simpson/cis320/crud_app/NameListEdit.java
- edu.simpson.cis320.crud_app.NameListEdit
 edu/simpson/cis320/crud_app/NameListGetServlet.java
  edu.simpson.cis320.crud_app.NameListGetServlet
+edu/simpson/cis320/crud_app/NameListDelete.java
+ edu.simpson.cis320.crud_app.NameListDelete
+edu/simpson/cis320/crud_app/NameListEdit.java
+ edu.simpson.cis320.crud_app.NameListEdit

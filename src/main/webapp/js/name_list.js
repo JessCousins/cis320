@@ -29,11 +29,41 @@ function updateTable() {
                     +htmlSafe(json_result[i].phone)
                     +'</td><td>'
                     +htmlSafe(json_result[i].birthday)
+                    +'</td><td>'
+                    +'<button type=\'button\' name=\'delete\' class=\'deleteButton btn btn-danger\' value=\''+json_result[i].id+'\'>'
+                    +'Delete'
+                    +'</button>'
                     +'</td></tr>');
             }
             console.log("Done");
+            $(".deleteButton").on("click", deleteItem);
         }
     );
+}
+
+function deleteItem(e) {
+    console.log("Delete");
+    console.log(e.target.value);
+
+    let user = {
+        id: e.target.value
+    }
+    console.log(user);
+
+    let userJSONObject = JSON.stringify(user);
+
+    $.ajax({
+        type: 'POST',
+        url: 'api/name_list_delete',
+        data: userJSONObject,
+        success: function(dataFromServer) {
+            console.log("Done deleting");
+            console.log(dataFromServer);
+            updateTable();
+        },
+        contentType: "application/json",
+        dataType: 'JSON'
+    });
 }
 
 // Call your code.
