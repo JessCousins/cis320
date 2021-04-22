@@ -68,7 +68,7 @@ public class NameListEdit extends HttpServlet {
             out.println("error");
         }
         PersonDAO.addPerson(personObject);
-
+        out.print("{\"message\": \"success\"}");
     }
 
 }

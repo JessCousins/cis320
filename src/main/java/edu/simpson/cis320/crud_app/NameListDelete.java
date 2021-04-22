@@ -34,7 +34,7 @@ public class NameListDelete extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         Person personObject = jsonb.fromJson(requestString, Person.class);
         PersonDAO.deletePerson(personObject);
-        out.print("{'message': 'success'}");
+        out.print("{\"message\": \"success\"}");
     }
 
 }
