@@ -32,13 +32,53 @@ function updateTable() {
                     +'</td><td>'
                     +'<button type=\'button\' name=\'delete\' class=\'deleteButton btn btn-danger\' value=\''+json_result[i].id+'\'>'
                     +'Delete'
-                    +'</button>'
+                    +'</button>&nbsp;'
+                    +"<button type='button' name='edit' class='editButton btn btn-primary' value='" +json_result[i].id+ "'>edit</button>"
                     +'</td></tr>');
+
             }
+
             console.log("Done");
             $(".deleteButton").on("click", deleteItem);
+            $(".editButton").on("click", editItem);
         }
     );
+}
+
+function editItem(e) {
+    console.debug("Edit");
+    console.debug("Edit: " + e.target.value);
+
+    // Grab the id from the event
+    let id = e.target.value;
+
+// This next line is fun.
+// "e" is the event of the mouse click
+// "e.target" is what the user clicked on. The button in this case.
+// "e.target.parentNode" is the node that holds the button. In this case, the table cell.
+// "e.target.parentNode.parentNode" is the parent of the table cell. In this case, the table row.
+// "e.target.parentNode.parentNode.querySelectorAll("td")" gets an array of all matching table cells in the row
+// "e.target.parentNode.parentNode.querySelectorAll("td")[0]" is the first cell. (You can grab cells 0, 1, 2, etc.)
+// "e.target.parentNode.parentNode.querySelectorAll("td")[0].innerHTML" is content of that cell. Like "Sam" for example.
+// How did I find this long chain? Just by setting a breakpoint and using the interactive shell in my browser.
+    let first = e.target.parentNode.parentNode.querySelectorAll("td")[1].innerHTML;
+    let last = e.target.parentNode.parentNode.querySelectorAll("td")[2].innerHTML;
+    let email = e.target.parentNode.parentNode.querySelectorAll("td")[3].innerHTML;
+    let phone = e.target.parentNode.parentNode.querySelectorAll("td")[4].innerHTML;
+    let birthday = e.target.parentNode.parentNode.querySelectorAll("td")[5].innerHTML;
+
+// repeat line above for all the fields we need
+
+    $('#id').val(id); // Yes, now we set and use the hidden ID field
+    $('#firstName').val(first);
+    $('#lastName').val(last);
+    $('#email').val(email);
+    $('#phone').val(phone);
+    $('#birthday').val(birthday);
+// Etc
+
+// Show the window
+    $('#myModal').modal('show');
 }
 
 function deleteItem(e) {
@@ -102,6 +142,7 @@ addItemButton.on("click", showDialogAdd);
 function saveChanges() {
     console.log("Save changes");
     let isValid = true;
+    let id = $('#id').val();
     let firstName = $('#firstName').val();
     let lastName = $('#lastName').val();
     let email = $('#email').val();
@@ -166,12 +207,26 @@ function saveChanges() {
         let phone = $('#phone').val();
         let birthday = $('#birthday').val();
 
-        let user = {
-            first: firstName,
-            last: lastName,
-            email,
-            phone,
-            birthday,
+        let user;
+        if (id === "") {
+            user = {
+
+                first: firstName,
+                last: lastName,
+                email,
+                phone,
+                birthday,
+            }
+        }
+        else {
+            user = {
+                id: id,
+                first: firstName,
+                last: lastName,
+                email,
+                phone,
+                birthday,
+            }
         }
         console.log(user);
 
@@ -184,6 +239,7 @@ function saveChanges() {
             success: function(dataFromServer) {
                 console.log(dataFromServer);
                 updateTable();
+                $('#myModal').modal('hide');
             },
             contentType: "application/json",
             dataType: 'JSON'

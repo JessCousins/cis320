@@ -67,7 +67,15 @@ public class NameListEdit extends HttpServlet {
         if (!m.find( )) {
             out.println("error");
         }
-        PersonDAO.addPerson(personObject);
+
+        if (personObject.getId() == 0) {
+            PersonDAO.addPerson(personObject);
+        }
+
+        else {
+            PersonDAO.editPerson(personObject);
+        }
+
         out.print("{\"message\": \"success\"}");
     }
 
